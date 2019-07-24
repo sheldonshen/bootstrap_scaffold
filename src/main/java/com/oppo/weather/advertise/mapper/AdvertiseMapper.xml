@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oppo.weather.advertise.mapper.AdvertiseMapper">
+    
+    <sql id="column_ist">
+            location_key,ad_pos,ad_link,update_time
+    </sql>
+    
+    
+    <insert id="uploadAd" parameterType="com.oppo.weather.advertise.model.Advertise">
+        <!--insert into t_weather_advertise (<include refid="column_list"/>)
+        values(#{locationKey},#{adPos},#{adLink},#{updateTime})-->
+
+        insert into t_weather_advertise (location_key,ad_pos,ad_link,update_time)
+        values(#{locationKey},#{adPos},#{adLink},#{updateTime})
+    </insert>
+
+</mapper>
