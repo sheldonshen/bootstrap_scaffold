@@ -7,17 +7,17 @@ public enum Message {
 
     SUCCESS(true,"success"),ERROR(false,"error");
 
-    private boolean number;
+    private boolean boolValue;
 
     private String msg;
 
     Message(boolean number,String msg){
-        this.number = number;
+        this.boolValue = number;
         this.msg = msg;
     }
 
-    public boolean getNumber() {
-        return number;
+    public boolean getBoolValue() {
+        return boolValue;
     }
 
     public String getMsg() {
@@ -26,7 +26,7 @@ public enum Message {
 
     public static String search(boolean number){
         for(Message message : Message.values()){
-            if(message.getNumber() == number){
+            if(message.getBoolValue() == number){
                 return message.getMsg();
             }
         }

@@ -18,6 +18,7 @@ public class WeatherAdvertiseApplication {
         SpringApplication.run(WeatherAdvertiseApplication.class, args);
     }
 
+
     /*@Bean(name = "datasource")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")

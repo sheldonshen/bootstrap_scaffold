@@ -61,17 +61,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+                <!--热部署配置-->
+                 <configuration>
+                     <!--fork 如果没有该项配置,肯定devtools不会起作用,即应用不会restart -->
+                     <fork>true</fork>
+                 </configuration>
+         </plugin>
+     </plugins>
 
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
+     <resources>
+         <resource>
+             <directory>src/main/java</directory>
+             <includes>
+                 <include>**/*.xml</include>
+             </includes>
+         </resource>
+     </resources>
+ </build>
 
 </project>

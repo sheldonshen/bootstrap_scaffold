@@ -11,7 +11,7 @@ public class WeatherAdvertiseApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println("unit test");
+        System.out.println("spring boot started");
     }
 
 }
