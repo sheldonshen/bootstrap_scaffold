@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -22,10 +23,11 @@ public class AdvertiseMapperTest {
     public void uploadAd() {
         Advertise advertise = new Advertise();
         advertise.setLocationKey("uuid_11123");
-        advertise.setAdPos((short)5);
+        advertise.setAdPos((short)3);
         advertise.setAdLink("ad link");
         advertise.setUpdateTime(new Date());
         Assert.assertTrue(advertiseMapper.uploadAd(advertise));
+        //File file =  new File("c;\\desk");
     }
 
 }

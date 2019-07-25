@@ -1,8 +1,8 @@
 package com.oppo.weather.advertise.enums;
 
-//import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//@Slf4j
 public enum Message {
 
     SUCCESS(true,"success"),ERROR(false,"error");
@@ -10,6 +10,8 @@ public enum Message {
     private boolean boolValue;
 
     private String msg;
+
+    private static  final Logger logger = LoggerFactory.getLogger(Message.class);
 
     Message(boolean number,String msg){
         this.boolValue = number;
@@ -30,7 +32,7 @@ public enum Message {
                 return message.getMsg();
             }
         }
-        //todo warn日志
+        logger.warn("can't find enum");
         return "unknown";
     }
 }
