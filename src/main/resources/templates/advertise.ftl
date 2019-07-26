@@ -17,7 +17,6 @@
 
 <script>
     function submitForm(){
-        //var form = new FormData(document.getElementById("form"));
         var form = new FormData($("#form"));
         $.ajax({
             url:"upload",
@@ -25,11 +24,11 @@
             data:form,
             processData:false,
             contentType:false,
-            sunccess:function(data){
-                //window.alert(data);
+            success:function(data){
+                window.alert(data.message);
             },
-            error:function(e){
-                //window.alert(e);
+            error:function(data){
+                window.alert(data.message);
             }
         });
     }

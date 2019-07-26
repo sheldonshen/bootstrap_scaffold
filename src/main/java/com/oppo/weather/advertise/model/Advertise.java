@@ -15,6 +15,7 @@ public class Advertise {
     private String adLink;
 
     private Date updateTime;
+
     /**-------------------------**/
     //一级标题
     private String firstClassTitle;

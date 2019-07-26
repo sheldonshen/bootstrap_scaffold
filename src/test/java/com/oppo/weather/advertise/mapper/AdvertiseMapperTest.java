@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
+
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -27,7 +27,6 @@ public class AdvertiseMapperTest {
         advertise.setAdLink("ad link");
         advertise.setUpdateTime(new Date());
         Assert.assertTrue(advertiseMapper.uploadAd(advertise));
-        //File file =  new File("c;\\desk");
     }
 
 }

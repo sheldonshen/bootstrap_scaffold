@@ -17,7 +17,6 @@ public class AdvertiseServiceTest {
     @Autowired
     private AdvertiseService advertiseService;
 
-
     @Test
     public void uploadAd(){
         Advertise advertise = new Advertise();

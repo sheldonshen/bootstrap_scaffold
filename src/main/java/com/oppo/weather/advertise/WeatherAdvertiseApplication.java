@@ -19,11 +19,11 @@ public class WeatherAdvertiseApplication {
     }
 
 
-    @Bean(name = "datasource")
+    /*@Bean(name = "datasource")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSourceBuild(){
         return DataSourceBuilder.create().build();
-    }
+    }*/
 
 }
