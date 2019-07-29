@@ -46,21 +46,48 @@ public class AdvertiseController {
     public ResponseResult uploadAd(Advertise advertise, @RequestParam("file") MultipartFile file){
         ResponseResult responseResult;
         message = null;
-        String imgName = saveImg(file);
-        if(Objects.isNull(imgName)){
-            responseResult = new ResponseResult("002",message);
-        }else{
-            advertise.setAdIconName(imgName);
-            advertise.setLocationKey(getRandomString(20));
-            advertise.setAdPos((short)3);
-            advertise.setUpdateTime(new Date());
-            boolean returnVal = advertiseService.uploadAd(advertise);
-            if(returnVal){
-                responseResult = new ResponseResult("000","上传成功");
+        try {
+            if(Objects.isNull(validateImageProperties(file))){//1
+                String imgName = generateImgName();//2
+                saveImgFileToDir(file,imgName);//3
+                message = saveImgNameToDB(advertise,imgName);//4
+                responseResult = new ResponseResult("003",message);
+            }else{
+                responseResult = new ResponseResult("001",message);
             }
-            responseResult =  new ResponseResult("001","上传失败");
+        } catch (IOException e) {
+            logger.error("上传图片异常,e={}",e.getMessage());
+            responseResult = new ResponseResult("002","上传图片异常");
         }
         return responseResult;
+    }
+
+    private String validateImageProperties(MultipartFile file) throws IOException{
+        BufferedImage originalImage = ImageIO.read(file.getInputStream());
+        int height = originalImage.getHeight();
+        int width = originalImage.getWidth();
+        if(file.getContentType().contains("image")){//检查文件是否是图片类型
+            logger.warn("请上传图片文件");
+            message = "请上传图片文件";
+        }else if(height != imageProperties.getHeight() ||  width != imageProperties.getWidth()){ //检查图片尺寸是否合规
+            logger.warn("图片尺寸不合格,请上传height={},width={}规格的图片",imageProperties.getHeight(),imageProperties.getWidth());
+            message = "图片尺寸不合格,请上传height="+imageProperties.getHeight()+",width="+imageProperties.getWidth()+"规格的图片";
+        }
+        return message;
+    }
+
+    private String generateImgName(){
+        String imgName = UUID.randomUUID().toString();
+        return imgName;
+    }
+
+    private boolean createImgDir(){
+        File dir = new File(imageProperties.getImgDir());
+        if(!dir.exists()){
+            return dir.mkdir();
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -68,26 +95,26 @@ public class AdvertiseController {
      * @param file 图片文件
      * @return 保存成功后,返回随机生成的文件名
      */
-    private String saveImg(MultipartFile file) {
-        String imgName=null;
-        try {
-            BufferedImage originalImage = ImageIO.read(file.getInputStream());
-            int height = originalImage.getHeight();
-            int width = originalImage.getWidth();
-            if(height == imageProperties.getHeight() && width == imageProperties.getWidth()){//检查文件尺寸是否合规
-                imgName = UUID.randomUUID().toString();
-                file.transferTo(new File(imageProperties.getImgDir() + imgName + imageProperties.getSuffix()));
-            }else{
-                message = "图片尺寸不合格,请上传height="+imageProperties.getHeight()+",width="+imageProperties.getWidth()+"规格的图片";
-                logger.warn("图片尺寸不合格,请上传height={},width={}规格的图片",imageProperties.getHeight(),imageProperties.getWidth());
-            }
-        } catch (IOException e) {
-            message = "图片上传异常";
-            logger.error("图片上传异常,e={}",e.getMessage());
+    private void saveImgFileToDir(MultipartFile file,String imgName) throws IOException {
+        if(createImgDir()){
+            //
+            file.transferTo(new File(imageProperties.getImgDir() + imgName + imageProperties.getSuffix()));
         }
-        return imgName;
     }
 
+    private String saveImgNameToDB(Advertise advertise,String imgName){
+        advertise.setAdIconName(imgName);
+        advertise.setLocationKey(getRandomString(20));
+        advertise.setAdPos((short)3);
+        advertise.setUpdateTime(new Date());
+        boolean returnVal = advertiseService.uploadAd(advertise);
+        if(returnVal){
+            message = "保存图片名称成功";
+        }else{
+            message = "保存图片名称失败";
+        }
+        return message;
+    }
 
     private static String getRandomString(int length){
         String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
