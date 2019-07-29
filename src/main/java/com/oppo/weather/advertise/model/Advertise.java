@@ -9,7 +9,8 @@ public class Advertise {
 
     private String locationKey;
 
-    private short adPos;//广告位
+    //广告位
+    private short adPos;
 
     //广告链接
     private String adLink;
