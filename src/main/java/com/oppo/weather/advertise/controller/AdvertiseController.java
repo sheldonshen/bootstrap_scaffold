@@ -34,6 +34,7 @@ public class AdvertiseController {
     @Autowired
     private ImageProperties imageProperties;
 
+    //
     private  String message;
 
     @RequestMapping(path = "index",method = RequestMethod.GET)
@@ -63,15 +64,18 @@ public class AdvertiseController {
     }
 
     private String validateImageProperties(MultipartFile file) throws IOException{
-        BufferedImage originalImage = ImageIO.read(file.getInputStream());
-        int height = originalImage.getHeight();
-        int width = originalImage.getWidth();
-        if(file.getContentType().contains("image")){//检查文件是否是图片类型
+        if(!file.getContentType().contains("image")){//检查文件是否是图片类型
             logger.warn("请上传图片文件");
             message = "请上传图片文件";
-        }else if(height != imageProperties.getHeight() ||  width != imageProperties.getWidth()){ //检查图片尺寸是否合规
-            logger.warn("图片尺寸不合格,请上传height={},width={}规格的图片",imageProperties.getHeight(),imageProperties.getWidth());
-            message = "图片尺寸不合格,请上传height="+imageProperties.getHeight()+",width="+imageProperties.getWidth()+"规格的图片";
+        }else {
+            BufferedImage originalImage = ImageIO.read(file.getInputStream());
+            int height = originalImage.getHeight();
+            int width = originalImage.getWidth();
+            if(height != imageProperties.getHeight() ||  width != imageProperties.getWidth()){ //检查图片尺寸是否合规
+            //if(false){
+                logger.warn("图片尺寸不合格,请上传height={},width={}规格的图片",imageProperties.getHeight(),imageProperties.getWidth());
+                message = "图片尺寸不合格,请上传height="+imageProperties.getHeight()+",width="+imageProperties.getWidth()+"规格的图片";
+            }
         }
         return message;
     }
@@ -84,7 +88,7 @@ public class AdvertiseController {
     private boolean createImgDir(){
         File dir = new File(imageProperties.getImgDir());
         if(!dir.exists()){
-            return dir.mkdir();
+            return dir.mkdirs();
         }else{
             return true;
         }
@@ -97,7 +101,7 @@ public class AdvertiseController {
      */
     private void saveImgFileToDir(MultipartFile file,String imgName) throws IOException {
         if(createImgDir()){
-            //
+            //文件后缀
             file.transferTo(new File(imageProperties.getImgDir() + imgName + imageProperties.getSuffix()));
         }
     }
