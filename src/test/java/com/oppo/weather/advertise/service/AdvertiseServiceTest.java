@@ -18,10 +18,10 @@ public class AdvertiseServiceTest {
     private AdvertiseService advertiseService;
 
     @Test
-    public void uploadAd(){
+    public void uploadAd() {
         Advertise advertise = new Advertise();
         advertise.setLocationKey("uuid_11123_service");
-        advertise.setAdPos((short)5);
+        advertise.setAdPos((short) 5);
         advertise.setAdLink("ad link");
         advertise.setUpdateTime(new Date());
         Assert.assertTrue(advertiseService.uploadAd(advertise));

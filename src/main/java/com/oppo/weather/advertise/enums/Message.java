@@ -5,17 +5,17 @@ import org.slf4j.LoggerFactory;
 
 public enum Message {
 
-    SUCCESS(true,"success"),ERROR(false,"error");
+    SUCCESS(true, "success"), ERROR(false, "error");
 
     private boolean boolValue;
 
     private String msg;
 
-    private static  final Logger logger = LoggerFactory.getLogger(Message.class);
+    private static final Logger logger = LoggerFactory.getLogger(Message.class);
 
-    Message(boolean number,String msg){
+    Message(boolean number, String msg) {
         this.boolValue = number;
-        this.msg = msg;
+        this.msg       = msg;
     }
 
     public boolean getBoolValue() {
@@ -26,9 +26,9 @@ public enum Message {
         return msg;
     }
 
-    public static String search(boolean number){
-        for(Message message : Message.values()){
-            if(message.getBoolValue() == number){
+    public static String search(boolean number) {
+        for (Message message : Message.values()) {
+            if (message.getBoolValue() == number) {
                 return message.getMsg();
             }
         }

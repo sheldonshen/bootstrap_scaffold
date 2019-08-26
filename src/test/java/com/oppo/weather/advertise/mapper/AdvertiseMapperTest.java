@@ -22,7 +22,7 @@ public class AdvertiseMapperTest {
     public void uploadAd() {
         Advertise advertise = new Advertise();
         advertise.setLocationKey("uuid_11123");
-        advertise.setAdPos((short)3);
+        advertise.setAdPos((short) 3);
         advertise.setAdLink("ad link");
         advertise.setUpdateTime(new Date());
         Assert.assertTrue(advertiseMapper.insertAd(advertise));
