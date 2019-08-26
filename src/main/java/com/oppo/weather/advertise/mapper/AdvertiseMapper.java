@@ -5,6 +5,6 @@ import com.oppo.weather.advertise.model.Advertise;
 
 public interface AdvertiseMapper {
 
-    boolean uploadAd(Advertise advertise);
+    boolean insertAd(Advertise advertise);
 
 }

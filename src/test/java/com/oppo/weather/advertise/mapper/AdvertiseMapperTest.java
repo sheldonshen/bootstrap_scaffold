@@ -1,6 +1,5 @@
 package com.oppo.weather.advertise.mapper;
 
-import com.oppo.weather.advertise.mapper.AdvertiseMapper;
 import com.oppo.weather.advertise.model.Advertise;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class AdvertiseMapperTest {
         advertise.setAdPos((short)3);
         advertise.setAdLink("ad link");
         advertise.setUpdateTime(new Date());
-        Assert.assertTrue(advertiseMapper.uploadAd(advertise));
+        Assert.assertTrue(advertiseMapper.insertAd(advertise));
     }
 
 }

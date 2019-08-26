@@ -17,7 +17,6 @@ public class Advertise {
 
     private Date updateTime;
 
-    /**-------------------------**/
     //一级标题
     private String firstClassTitle;
 

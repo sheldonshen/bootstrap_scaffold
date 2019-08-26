@@ -14,6 +14,11 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 
     @Override
     public boolean uploadAd(Advertise advertise) {
-        return advertiseMapper.uploadAd(advertise);
+        /**
+         * 方法取名约定
+         * service:取名贴近具体业务:uploadAd
+         * dao:取名贴近数据库:insertAd
+         */
+        return advertiseMapper.insertAd(advertise);
     }
 }

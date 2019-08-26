@@ -12,6 +12,7 @@
     二级标题:<input type="text" name="secondClassTitle" required minlength="1" maxlength="40"><br>
     图标文件:<input type="file" name="file" required><br>
     广告链接:<input type="text" name="adLink"  required maxlength="255" ><br>
+    <!--fix  -->
     <input type="submit" value="提交" onclick="submitForm();return false"> <input type="reset" value="取消">
 </form>
 </body>

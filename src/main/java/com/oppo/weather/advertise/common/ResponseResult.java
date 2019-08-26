@@ -1,4 +1,4 @@
-package com.oppo.weather.advertise.config;
+package com.oppo.weather.advertise.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
