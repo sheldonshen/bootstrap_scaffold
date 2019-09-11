@@ -8,7 +8,7 @@
             second_class_title,ad_icon_name
     </sql>
 
-    <insert id="uploadAd" parameterType="com.oppo.weather.advertise.model.Advertise">
+    <insert id="insertAd" parameterType="com.oppo.weather.advertise.model.Advertise">
         insert into t_weather_advertise_copy (location_key,ad_pos,ad_link,update_time,first_class_title,
         second_class_title,ad_icon_name)
         values(#{locationKey},#{adPos},#{adLink},#{updateTime},#{firstClassTitle},#{secondClassTitle},#{adIconName})

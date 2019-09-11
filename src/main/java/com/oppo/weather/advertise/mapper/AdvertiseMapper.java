@@ -7,4 +7,6 @@ public interface AdvertiseMapper {
 
     boolean insertAd(Advertise advertise);
 
+    //public void insertPos(Advertise advertise);
+
 }
